@@ -4,6 +4,10 @@ from level1 import world_data
 from player import Player
 from button import Button
 
+
+def reset_game():
+    my_player.reset(100,300)
+
 enemy_group = pygame.sprite.Group()
 
 game_world = World(world_data,enemy_group)
@@ -27,7 +31,8 @@ while running:
     
     
     if my_player.alive == False:
-        restart_btn.draw()
+        if restart_btn.draw():
+            reset_game()
     else:
         game_world.draw()
         my_player.move(game_world.tile_map, enemy_group)

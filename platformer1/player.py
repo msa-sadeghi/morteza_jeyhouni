@@ -4,6 +4,9 @@ from pygame.sprite import Sprite
 
 class Player(Sprite):
     def __init__(self,x,y):
+        self.reset(x,y)
+    
+    def reset(self,x,y):
         self.right_images = []
         self.left_images = []
         for i in range(1,5):
