@@ -1,6 +1,6 @@
 from constants import *
 from world import World
-from level1 import world_data
+from level_creator import world_data
 from player import Player
 from button import Button
 
@@ -9,8 +9,10 @@ def reset_game():
     my_player.reset(100,300)
 
 enemy_group = pygame.sprite.Group()
+lava_group = pygame.sprite.Group()
+door_group = pygame.sprite.Group()
 
-game_world = World(world_data,enemy_group)
+game_world = World(world_data,enemy_group, lava_group, door_group)
 my_player = Player(100, 300)
 
 FPS = 60
@@ -34,10 +36,15 @@ while running:
         if restart_btn.draw():
             reset_game()
     else:
-        game_world.draw()
-        my_player.move(game_world.tile_map, enemy_group)
         enemy_group.update()
-        my_player.draw()
+        game_world.draw()
         enemy_group.draw(SCREEN)
+        lava_group.draw(SCREEN)
+        door_group.draw(SCREEN)
+    if my_player.next_level == True:
+        print("*************************************")
+    my_player.move(game_world.tile_map, enemy_group, lava_group,door_group)
+    my_player.draw()
+    
     pygame.display.update()
     clock.tick(FPS)

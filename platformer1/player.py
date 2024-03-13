@@ -26,6 +26,7 @@ class Player(Sprite):
         self.in_air = False
         self.jump_sound = pygame.mixer.Sound("assets/img/jump.wav")
         self.alive = True
+        self.next_level = False
         self.dead_image = pygame.image.load("assets/img/ghost.png")
     
     def draw(self):
@@ -45,7 +46,7 @@ class Player(Sprite):
                 self.image = self.right_images[0]
             if self.direction == -1:
                 self.image = self.left_images[0]
-    def move(self, tile_map, enemy_group):
+    def move(self, tile_map, enemy_group, lava_group, door_group):
         dx = 0
         dy = 0
         if self.alive:
@@ -84,6 +85,10 @@ class Player(Sprite):
             self.animation()
             if pygame.sprite.spritecollide(self, enemy_group, False):
                 self.alive = False
+            if pygame.sprite.spritecollide(self, lava_group, False):
+                self.alive = False
+            if pygame.sprite.spritecollide(self, door_group, False):
+                self.next_level = True
         else:
             self.image = self.dead_image
             if self.rect.top > 200:

@@ -18,4 +18,6 @@ bg_image = pygame.transform.scale(bg_image, (SCREEN_WIDTH, SCREEN_HEIGHT))
 dirt_image = pygame.image.load("assets/dirt.png")
 grass_image = pygame.image.load("assets/grass.png")
 water_image = pygame.image.load("assets/water.png")
+lava_image = pygame.image.load("assets/img/lava.png")
+door_image = pygame.image.load("assets/img/exit.png")
 
