@@ -28,6 +28,7 @@ class Player(Sprite):
         self.alive = True
         self.next_level = False
         self.dead_image = pygame.image.load("assets/img/ghost.png")
+        self.health = 3
     
     def draw(self):
         SCREEN.blit(self.image, self.rect)
@@ -83,8 +84,16 @@ class Player(Sprite):
                         self.y_velocity = 0
                         dy = tile[1].bottom - self.rect.top
             self.animation()
-            if pygame.sprite.spritecollide(self, enemy_group, False):
-                self.alive = False
+            # if pygame.sprite.spritecollide(self, enemy_group, False):
+            #     self.alive = False
+            for enemy in enemy_group:
+                if enemy.rect.colliderect(self.rect):
+                    enemy.kill()
+                    self.health -= 1
+                    if self.health <= 0:
+                        self.alive = False
+                
+                
             if pygame.sprite.spritecollide(self, lava_group, False):
                 self.alive = False
             if pygame.sprite.spritecollide(self, door_group, False):
