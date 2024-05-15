@@ -26,7 +26,7 @@ while running:
         if pygame.time.get_ticks() - last_enemy_spawn_time > 2000:
             last_enemy_spawn_time = pygame.time.get_ticks()
             i = random.randrange(len(enemies_type))
-            Enemy(enemies_type[i], enemies_health[i], 1, 100, 300, enemy_group, 0.2)
+            Enemy(enemies_type[i], enemies_health[i], 1, 100, random.choice([300,350,400,450,500,510]), enemy_group, 0.2)
             level_difficulty += enemies_health[i]    
     
     
@@ -36,5 +36,5 @@ while running:
     bullet_group.draw(screen)     
     bullet_group.update()
     enemy_group.draw(screen)     
-    enemy_group.update()
+    enemy_group.update(castle)
     pygame.display.update()

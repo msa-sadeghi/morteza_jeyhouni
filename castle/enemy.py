@@ -23,10 +23,27 @@ class Enemy(Sprite):
         self.image_number = 0
         self.image = self.all_images[self.action][self.image_number]
         self.rect = self.image.get_rect(topleft = (x,y))
+        self.last_anim_time = pygame.time.get_ticks()
         group.add(self)
         
-    def update(self):
-        self.rect.x += self.speed
+    def update(self, castle):
+        if self.rect.right > castle.rect.left:
+            self.update_action("attack")
+        if self.action == "walk":
+            self.rect.x += self.speed
+        self.animation()
+        
+    def animation(self):
+        self.image = self.all_images[self.action][self.image_number]
+        if pygame.time.get_ticks() - self.last_anim_time > 100:
+            self.last_anim_time = pygame.time.get_ticks()
+            self.image_number += 1
+            if self.image_number >= len(self.all_images[self.action]):
+                self.image_number = 0
+        
+    def update_action(self, n)    :
+        if self.action != n:
+            self.action = n
         
                 
             
