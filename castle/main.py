@@ -36,5 +36,5 @@ while running:
     bullet_group.draw(screen)     
     bullet_group.update()
     enemy_group.draw(screen)     
-    enemy_group.update(castle)
+    enemy_group.update(castle, bullet_group,screen)
     pygame.display.update()

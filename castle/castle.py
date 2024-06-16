@@ -6,6 +6,8 @@ class Castle(Sprite):
     def __init__(self, x,y):
         super().__init__()
         self.health = 100
+        self.money = 0
+        self.score = 0
         self.max_health = 100
         w = castle_100.get_width()
         h = castle_100.get_height()
@@ -17,6 +19,9 @@ class Castle(Sprite):
         self.shoot_ = False   
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+        font = pygame.font.SysFont("arial", 22)
+        health = font.render(f"Health: {self.health}", True, (240,70,10))
+        screen.blit(health, (600, 500))
     def shoot(self, bullet_group):
         if pygame.mouse.get_pressed()[0] and not self.shoot_:
             self.shoot_ = True
