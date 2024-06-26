@@ -20,6 +20,14 @@ clock = pygame.time.Clock()
 font = pygame.font.SysFont("arial", 48)
 next_level_text = font.render("WELCOME TO NEW LEVEL 1", True, (255, 20,10))
 next_level_rect = next_level_text.get_rect(center=(SCREEN_WIDTH/2, SCREEN_HEIGHT/2 - 80))
+
+score_text = font.render(f"Score : {castle.score}", True, (255, 20,10))
+score_rect = next_level_text.get_rect(topleft=(0,0))
+money_text = font.render(f"money : {castle.money}", True, (255, 20,10))
+money_rect = next_level_text.get_rect(topleft=(300,0))
+
+
+
 FPS = 60
 level = 1
 next_level = False
@@ -56,7 +64,10 @@ while running:
             level += 1
             max_difficulty = max_difficulty + 0.1 * max_difficulty
             level_difficulty = 0
-    
+    score_text = font.render(f"Score : {castle.score}", True, (255, 20,10))
+    money_text = font.render(f"money : {castle.money}", True, (255, 20,10))
+    screen.blit(score_text, score_rect)
+    screen.blit(money_text, money_rect)
     castle.draw(screen) 
     castle.shoot(bullet_group) 
     bullet_group.draw(screen)     
