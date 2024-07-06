@@ -10,6 +10,7 @@ tower_100 = pygame.image.load("assets/tower/tower_100.png")
 #other images
 armour = pygame.image.load("assets/armour.png")
 bg = pygame.image.load("assets/bg.png")
+
 bullet = pygame.image.load("assets/bullet.png")
 crosshair = pygame.image.load("assets/crosshair.png")
 repair = pygame.image.load("assets/repair.png")

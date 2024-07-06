@@ -27,16 +27,26 @@ class Castle(Sprite):
         screen.blit(self.image, self.rect)
         font = pygame.font.SysFont("arial", 22)
         health = font.render(f"Health: {self.health}", True, (240,70,10))
-        screen.blit(health, (600, 500))
+        screen_width = screen.get_width()
+        screen_heigth = screen.get_height()
+        screen.blit(health, (screen_width - self.rect.size[0]/2, 500))
     def shoot(self, bullet_group):
-        if pygame.mouse.get_pressed()[0] and not self.shoot_:
+        if pygame.mouse.get_pressed()[0] and not self.shoot_ :
             self.shoot_ = True
             mouse_position = pygame.mouse.get_pos()
             y_dis = -(mouse_position[1] - self.rect.midleft[1])
             x_dis = mouse_position[0] - self.rect.midleft[0]
             degree = math.atan2(y_dis, x_dis)
-            
-            Bullet(self.rect.midleft[0], self.rect.midleft[1], bullet_group, degree)
+            if mouse_position[1] > 70:
+                Bullet(self.rect.midleft[0], self.rect.midleft[1], bullet_group, degree)
         if not pygame.mouse.get_pressed()[0]:
             self.shoot_ = False
+            
+    def repair(self):
+        if self.money >= 10:
+            self.health += 30
+            self.money -= 10
+            if self.health > self.max_health:
+                self.health = self.max_health
+            
         
