@@ -18,6 +18,12 @@ class Castle(Sprite):
         self.rect = self.image.get_rect(topleft=(x,y)) 
         self.shoot_ = False   
     def draw(self, screen):
+        if self.health <= 25:
+            self.image = self.image_25
+        elif self.health <= 50:
+            self.image = self.image_50
+        else: 
+            self.image = self.image_100
         screen.blit(self.image, self.rect)
         font = pygame.font.SysFont("arial", 22)
         health = font.render(f"Health: {self.health}", True, (240,70,10))

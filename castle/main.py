@@ -3,7 +3,12 @@ from constants import *
 from castle import Castle
 from enemy import Enemy
 import random
+from button import Button
 pygame.init()
+
+repair_image = pygame.image.load("assets/repair.png")
+repair_button = Button(repair_image, 700, 20)
+
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 enemies_health = (100, 125, 150, 175)
@@ -74,4 +79,5 @@ while running:
     bullet_group.update()
     enemy_group.draw(screen)     
     enemy_group.update(castle, bullet_group,screen)
+    repair_button.draw(screen)
     pygame.display.update()
