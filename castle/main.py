@@ -4,6 +4,8 @@ from castle import Castle
 from enemy import Enemy
 import random
 from button import Button
+
+
 pygame.init()
 
 repair_image = pygame.image.load("assets/repair.png")
@@ -91,4 +93,6 @@ while running:
         castle.repair()
         
     armour_button.draw(screen)
+    if armour_button.click():
+        castle.armour()
     pygame.display.update()

@@ -2,6 +2,7 @@ from pygame.sprite import Sprite
 from constants import *
 from bullet import Bullet
 import math
+from healthbar import HealthBar
 class Castle(Sprite):
     def __init__(self, x,y):
         super().__init__()
@@ -16,8 +17,10 @@ class Castle(Sprite):
         self.image_25 = pygame.transform.scale(castle_25, (w * 0.2, h * 0.2))
         self.image = self.image_100
         self.rect = self.image.get_rect(topleft=(x,y)) 
-        self.shoot_ = False   
+        self.shoot_ = False 
+        self.healthbar = HealthBar(self.rect.centerx, self.rect.top, self.health, self.max_health)  
     def draw(self, screen):
+        self.healthbar.update(screen, self.health)
         if self.health <= 25:
             self.image = self.image_25
         elif self.health <= 50:
@@ -48,5 +51,9 @@ class Castle(Sprite):
             self.money -= 10
             if self.health > self.max_health:
                 self.health = self.max_health
+                
+    def armour(self):
+        if self.money >= 1000:
+            self.max_health += self.max_health * 0.2
             
         
