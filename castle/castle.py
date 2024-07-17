@@ -53,7 +53,7 @@ class Castle(Sprite):
                 self.health = self.max_health
                 
     def armour(self):
-        if self.money >= 1000:
+        if self.money >= 10000:
             self.max_health += self.max_health * 0.2
             
         

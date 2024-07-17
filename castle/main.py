@@ -4,7 +4,7 @@ from castle import Castle
 from enemy import Enemy
 import random
 from button import Button
-
+from tower import Tower
 
 pygame.init()
 
@@ -12,6 +12,9 @@ repair_image = pygame.image.load("assets/repair.png")
 repair_button = Button(repair_image, 600, 20)
 armour_image = pygame.image.load("assets/armour.png")
 armour_button = Button(armour_image, 660, 20)
+tower_image = pygame.image.load("assets/tower/tower_100.png")
+tower_button = Button(tower_image, 720, 20)
+
 screen = pygame.display.set_mode()
 
 SCREEN_WIDTH = screen.get_width()
@@ -37,7 +40,7 @@ score_rect = next_level_text.get_rect(topleft=(0,0))
 money_text = font.render(f"money : {castle.money}", True, (255, 20,10))
 money_rect = next_level_text.get_rect(topleft=(300,0))
 
-
+tower_group = pygame.sprite.Group()
 
 FPS = 60
 level = 1
@@ -95,4 +98,11 @@ while running:
     armour_button.draw(screen)
     if armour_button.click():
         castle.armour()
+    tower_button.draw(screen)
+    if tower_button.click():
+        
+        Tower(SCREEN_WIDTH - 300, SCREEN_HEIGHT - 100, tower_group)
+  
+    tower_group.update()
+    tower_group.draw(screen)
     pygame.display.update()
