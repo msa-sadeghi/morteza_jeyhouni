@@ -41,11 +41,12 @@ money_text = font.render(f"money : {castle.money}", True, (255, 20,10))
 money_rect = next_level_text.get_rect(topleft=(300,0))
 
 tower_group = pygame.sprite.Group()
-
+tower_count = 0
 FPS = 60
 level = 1
 next_level = False
 level_reset_time = 0
+tower_spawn = False
 running = True
 while running:
     screen.blit(bg, (0,0)) 
@@ -78,8 +79,10 @@ while running:
         if pygame.time.get_ticks() - level_reset_time > 1500:
             next_level = False
             enemy_group.empty()
+            tower_group.empty()
             level += 1
-            max_difficulty = max_difficulty + 0.1 * max_difficulty
+            tower_count = 0
+            max_difficulty = max_difficulty + 2 * max_difficulty
             level_difficulty = 0
     score_text = font.render(f"Score : {castle.score}", True, (255, 20,10))
     money_text = font.render(f"money : {castle.money}", True, (255, 20,10))
@@ -99,9 +102,13 @@ while running:
     if armour_button.click():
         castle.armour()
     tower_button.draw(screen)
-    if tower_button.click():
-        
-        Tower(SCREEN_WIDTH - 300, SCREEN_HEIGHT - 100, tower_group)
+    if tower_button.click() and not tower_spawn and tower_count< level:
+         tower_spawn = True
+    if tower_spawn == True and not tower_button.click():
+        if pygame.mouse.get_pressed()[0]:
+                Tower(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], tower_group)
+                tower_spawn = False
+                tower_count += 1
   
     tower_group.update()
     tower_group.draw(screen)

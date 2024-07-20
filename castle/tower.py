@@ -9,7 +9,7 @@ class Tower(Sprite):
             img = pygame.image.load(f"assets/tower/tower_{i}.png")
             img_w = img.get_width()
             img_h = img.get_height()
-            img = pygame.transform.scale(img, (img_w * 0.5, img_h * 0.5))
+            img = pygame.transform.scale(img, (img_w * 0.2, img_h * 0.2))
             self.all_images.append(img)
             
         self.image = self.all_images[2]
