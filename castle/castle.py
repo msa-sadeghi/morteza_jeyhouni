@@ -41,7 +41,7 @@ class Castle(Sprite):
             x_dis = mouse_position[0] - self.rect.midleft[0]
             degree = math.atan2(y_dis, x_dis)
             if mouse_position[1] > 70:
-                Bullet(self.rect.midleft[0], self.rect.midleft[1], bullet_group, degree)
+                Bullet(self.rect.midleft[0], self.rect.midleft[1], bullet_group, degree, 32)
         if not pygame.mouse.get_pressed()[0]:
             self.shoot_ = False
             

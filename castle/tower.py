@@ -1,5 +1,7 @@
 from pygame.sprite import Sprite
 import pygame
+from bullet import Bullet
+import math
 class Tower(Sprite):
     def __init__(self, x,y, group):
         super().__init__()
@@ -16,8 +18,16 @@ class Tower(Sprite):
         self.rect = self.image.get_rect()
         self.rect.topleft = (x,y)
         group.add(self)
-    def update(self):
-        pass
+        self.last_shoot_time = 0
+    def update(self, enemy_group, bullet_group):
+        for enemy in enemy_group:
+            if self.rect.x - enemy.rect.x < 400 and enemy.alive:
+                ydist = -(enemy.rect.bottom - self.rect.y)
+                xdist = enemy.rect.right - self.rect.x
+                deg = math.atan2(ydist, xdist)
+                if pygame.time.get_ticks() - self.last_shoot_time > 1500:
+                    self.last_shoot_time = pygame.time.get_ticks()
+                    Bullet(self.rect.x, self.rect.y, bullet_group, deg, 24)
         
             
             

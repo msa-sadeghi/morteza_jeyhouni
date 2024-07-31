@@ -110,6 +110,6 @@ while running:
                 tower_spawn = False
                 tower_count += 1
   
-    tower_group.update()
+    tower_group.update(enemy_group, bullet_group)
     tower_group.draw(screen)
     pygame.display.update()
