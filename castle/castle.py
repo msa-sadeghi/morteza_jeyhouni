@@ -1,3 +1,4 @@
+from tkinter import SEL
 from pygame.sprite import Sprite
 from constants import *
 from bullet import Bullet
@@ -18,7 +19,8 @@ class Castle(Sprite):
         self.image = self.image_100
         self.rect = self.image.get_rect(topleft=(x,y)) 
         self.shoot_ = False 
-        self.healthbar = HealthBar(self.rect.centerx, self.rect.top, self.health, self.max_health)  
+        self.healthbar = HealthBar(self.rect.centerx, self.rect.top, self.health, self.max_health) 
+        self.ammo = 25
     def draw(self, screen):
         self.healthbar.update(screen, self.health)
         if self.health <= 25:
@@ -32,10 +34,11 @@ class Castle(Sprite):
         health = font.render(f"Health: {self.health}", True, (240,70,10))
         screen_width = screen.get_width()
         screen_heigth = screen.get_height()
-        screen.blit(health, (screen_width - self.rect.size[0]/2, 500))
+        screen.blit(health, (screen_width - self.rect.size[0]/2, 450))
     def shoot(self, bullet_group):
-        if pygame.mouse.get_pressed()[0] and not self.shoot_ :
+        if pygame.mouse.get_pressed()[0] and not self.shoot_ and self.ammo > 0 :
             self.shoot_ = True
+            self.ammo -= 1
             mouse_position = pygame.mouse.get_pos()
             y_dis = -(mouse_position[1] - self.rect.midleft[1])
             x_dis = mouse_position[0] - self.rect.midleft[0]
