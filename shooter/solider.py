@@ -20,6 +20,9 @@ class Soldier(Sprite):
             self.animation_list.append(images)
         self.image = self.animation_list[self.action][self.image_number]
         self.rect = self.image.get_rect(center=(x,y))
+        
+    def draw(self, screen):
+        screen.blit(self.image, self.rect)
             
         
     
